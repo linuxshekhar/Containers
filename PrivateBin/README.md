@@ -1,6 +1,3 @@
-# <img align="center" alt="PrivateBin" src="https://privatebin.info/theme/img/icon.svg" /> Private Bin
-
-
 <br />
 <div align="center">
   <h2 align="center"> <img align="center" alt="PrivateBin" src="https://privatebin.info/theme/img/icon.svg"/> Private Bin</h2>
