@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: privatebin-deployment
+  labels:
+    app: privatebin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: privatebin
+  template:
+    metadata:
+      labels:
+        app: privatebin
+    spec:
+      containers:
+        - name: privatebin
+          image: privatebin/nginx-fpm-alpine
+          ports:
+            - containerPort: 8080
+#          securityContext:
+#            runAsUser: 1000
+#            fsGroup: 1000
+#            readOnlyRootFilesystem: true
+#        volumeMounts:
+#          - name: privatebin-data
+#            mountPath: /srv/data
+#      volumes:
+#        - name: privatebin-data
+#          hostPath:
+#            path: /home/rauts/Pastebin
+#            type: Directory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: privatebin-service
+spec:
+  selector:
+    app: privatebin
+  ports:
+    - protocol: TCP
+      port: 8082
+      targetPort: 8080
+  type: NodePort
