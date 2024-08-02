@@ -30,7 +30,7 @@ You can follow below steps to configure:
 - Deploy as Pod with Service:
   - ```$ kubectl create -f PodWithService.yml```
 - Nginx Conf for Proxy pass to redirect using SSL:
-  - ```$ kubectl create -f DeploymentWithService.yml```
+  - ```$ vim /etc/nginx/nginx.conf```
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
