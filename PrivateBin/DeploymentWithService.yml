@@ -29,7 +29,7 @@ spec:
 #      volumes:
 #        - name: privatebin-data
 #          hostPath:
-#            path: /home/rauts/Pastebin
+#            path: /home/sherlock/Pastebin
 #            type: Directory
 ---
 apiVersion: v1
