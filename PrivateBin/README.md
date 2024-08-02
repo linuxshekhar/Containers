@@ -1,54 +1,52 @@
-# Private Bin
+# <img align="center" alt="PrivateBin" src="https://privatebin.info/theme/img/icon.svg" /> Private Bin
 
-Here are the steps to configure Nginx
 
-~~~
-http {
-    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                      '$status $body_bytes_sent "$http_referer" '
-                      '"$http_user_agent" "$http_x_forwarded_for"';
+<br />
+<div align="center">
+  <h2 align="center"> <img align="center" alt="PrivateBin" src="https://privatebin.info/theme/img/icon.svg"/> Private Bin</h2>
+  <h4 align="center">This repository has files to configure your Private Bin using Docker.</h4>
+</div>
 
-    access_log  /var/log/nginx/access.log  main;
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#preliminarydetails">Preliminary Details</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+  </ol>
+</details>
 
-    sendfile            on;
-    tcp_nopush          on;
-    tcp_nodelay         on;
-    keepalive_timeout   65;
-    types_hash_max_size 2048;
+## Preliminary Details:
+- Files in the repo:
+  - [To create Deployment](DeploymentWithService.yml)
+  - [To create Pod](PodWithService.yml)
+  - [Nginx Conf](nginx.conf)
 
-    include             /etc/nginx/mime.types;
-    default_type        application/octet-stream;
+## Usage
+You can follow below steps to configure:
+- Deploy as Deployment with Service:
+  - ```$ kubectl create -f DeploymentWithService.yml```
+- Deploy as Pod with Service:
+  - ```$ kubectl create -f PodWithService.yml```
+- Nginx Conf for Proxy pass to redirect using SSL:
+  - ```$ kubectl create -f DeploymentWithService.yml```
 
-    # Load modular configuration files from the /etc/nginx/conf.d directory.
-    # See http://nginx.org/en/docs/ngx_core_module.html#include
-    # for more information.
-    include /etc/nginx/conf.d/*.conf;
 
-    server {
-        listen       80 default_server;
-        listen       [::]:80 default_server;
-        server_name  _;
-        root         /usr/share/nginx/html;
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-	listen 443 ssl default_server;
-        ssl_certificate /etc/nginx/ssl/localhost.crt;
-        ssl_certificate_key /etc/nginx/ssl/localhost.key;
-        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-        ssl_prefer_server_ciphers on;
-        ssl_ciphers 'EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH';
-        # Load configuration files for the default server block.
-        include /etc/nginx/default.d/*.conf;
+### Built With
 
-        location / {
-	    proxy_pass http://localhost:31874;
-        }
+[![PrivateBin][PrivateBin.js]][PrivateBin-url] [![Kubernetes][Kubernetes.js]][Kubernetes-url] [![Nginx][Nginx.js]][Nginx-url]
 
-        error_page 404 /404.html;
-            location = /40x.html {
-        }
 
-        error_page 500 502 503 504 /50x.html;
-            location = /50x.html {
-        }
-    }
-~~~
+[PrivateBin.js]: https://img.shields.io/badge/privatebin-FFD700?style=for-the-badge&logo=lock&logoColor=black
+[PrivateBin-url]: https://privatebin.info/
+[Kubernetes.js]: https://img.shields.io/badge/kubernetes-007BFF?style=for-the-badge&logo=kubernetes&logoColor=white
+[Kubernetes-url]: https://kubernetes.io/
+[Nginx.js]: https://img.shields.io/badge/nginx-28a745?style=for-the-badge&logo=nginx&logoColor=white
+[Nginx-url]: https://www.nginx.com
+[pbicon]: https://privatebin.info/theme/img/icon.svg
